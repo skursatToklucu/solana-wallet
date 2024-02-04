@@ -5,18 +5,16 @@ const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('devnet'),
 
 async function createWallet() {
     const newKeypair = solanaWeb3.Keypair.generate();
-    const airdropSignature = await connection.requestAirdrop(newKeypair.publicKey, solanaWeb3.LAMPORTS_PER_SOL);
-    await connection.confirmTransaction(airdropSignature);
-    const balance = await connection.getBalance(newKeypair.publicKey);
 
     const walletData = {
         publicKey: newKeypair.publicKey.toString(),
         secretKey: Array.from(newKeypair.secretKey),
-        balance
+        balance: 0 
     };
     fs.writeFileSync('wallet.json', JSON.stringify(walletData, null, 2));
-    console.log('Cüzdan ve bakiye oluşturuldu:', walletData);
+    console.log('Cüzdan oluşturuldu:', walletData);
 }
+
 
 async function airdropSol(publicKey: string, amount: number = 1) {
     const publicKeyObj = new solanaWeb3.PublicKey(publicKey);
