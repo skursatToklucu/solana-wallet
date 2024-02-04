@@ -12,7 +12,7 @@ async function createWallet() {
         balance: 0 
     };
     fs.writeFileSync('wallet.json', JSON.stringify(walletData, null, 2));
-    console.log('Cüzdan oluşturuldu:', walletData);
+    console.log('Wallet Created:', walletData);
 }
 
 
@@ -26,7 +26,7 @@ async function airdropSol(publicKey: string, amount: number = 1) {
 async function checkBalance(publicKey: string) {
     const publicKeyObj = new solanaWeb3.PublicKey(publicKey);
     const balance = await connection.getBalance(publicKeyObj);
-    console.log(`Cüzdan bakiyesi: ${balance / solanaWeb3.LAMPORTS_PER_SOL} SOL`);
+    console.log(`Balance: ${balance / solanaWeb3.LAMPORTS_PER_SOL} SOL`);
     return balance / solanaWeb3.LAMPORTS_PER_SOL;
 }
 
@@ -41,7 +41,7 @@ async function transferSol(fromSecretKey: number[], toPublicKey: string, amount:
         })
     );
     const signature = await solanaWeb3.sendAndConfirmTransaction(connection, transaction, [fromKeypair]);
-    console.log(`Transfer başarılı: ${signature}`);
+    console.log(`Transfer is successful: ${signature}`);
 }
 
 async function main() {
@@ -62,7 +62,7 @@ async function main() {
             await transferSol(wallet.secretKey, args[1], parseFloat(args[2]));
             break;
         default:
-            console.log('Komut tanınmadı.');
+            console.log('Command not recognized.');
     }
 }
 
