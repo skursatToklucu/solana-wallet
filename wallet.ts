@@ -13,17 +13,13 @@ async function createWallet() {
     };
     let walletsArray = [];
 
-    // Dosyanın var olup olmadığını kontrol et
     if (fs.existsSync('wallet.json')) {
-        // Dosyayı oku ve mevcut cüzdan listesini al
         const data = fs.readFileSync('wallet.json', 'utf-8');
         walletsArray = JSON.parse(data);
     }
 
-    // Yeni cüzdanı listeye ekle
     walletsArray.push(walletData);
 
-    // Dosyayı yeni liste ile güncelle
     fs.writeFileSync('wallet.json', JSON.stringify(walletsArray, null, 2));
     console.log('New wallet added:', walletData);
 }
@@ -57,7 +53,7 @@ async function transferSol(fromSecretKey: number[], toPublicKey: string, amount:
     const fromBalance = await connection.getBalance(fromKeypair.publicKey);
     if (fromBalance < totalAmount) {
         console.log(`Yetersiz bakiye: Gerekli bakiye ${totalAmount / solanaWeb3.LAMPORTS_PER_SOL} SOL, mevcut bakiye ${fromBalance / solanaWeb3.LAMPORTS_PER_SOL} SOL`);
-        return; // Yetersiz bakiye varsa işlemi durdur
+        return; 
     }
 
     // Transfer işlemi
@@ -86,17 +82,15 @@ async function main() {
             await checkBalance(args[1]);
             break;
             case 'transfer':
-                // cüzdanların saklandığı dosyayı oku
                 const wallets = JSON.parse(fs.readFileSync('wallet.json', 'utf-8'));
-                // args[1] yerine cüzdan indexini almalıyız, args[2] alıcının publicKey'i, args[3] miktar
-                const walletIndex = parseInt(args[1], 10); // args[1] artık cüzdanın indexi
+                const walletIndex = parseInt(args[1], 10); 
                 if (walletIndex < 0 || walletIndex >= wallets.length) {
                     console.log("Invalid wallet index.");
                     return;
                 }
                 const fromWallet = wallets[walletIndex];
-                const toPublicKey = args[2]; // Alıcının publicKey'i
-                const transferAmount = parseFloat(args[3]); // Transfer miktarı
+                const toPublicKey = args[2]; 
+                const transferAmount = parseFloat(args[3]); 
                 await transferSol(fromWallet.secretKey, toPublicKey, transferAmount);
                 break;
             default:
