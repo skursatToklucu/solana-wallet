@@ -44,19 +44,19 @@ async function transferSol(fromSecretKey: number[], toPublicKey: string, amount:
     const fromKeypair = solanaWeb3.Keypair.fromSecretKey(new Uint8Array(fromSecretKey));
     const toPublicKeyObj = new solanaWeb3.PublicKey(toPublicKey);
     
-    // İşlem ücretini hesapla
+
     const { feeCalculator } = await connection.getRecentBlockhash();
     const transactionFee = feeCalculator.lamportsPerSignature * 100; 
     const totalAmount = amount * solanaWeb3.LAMPORTS_PER_SOL + transactionFee; 
 
-    // Gönderici cüzdanın bakiyesini kontrol et
+
     const fromBalance = await connection.getBalance(fromKeypair.publicKey);
     if (fromBalance < totalAmount) {
         console.log(`Yetersiz bakiye: Gerekli bakiye ${totalAmount / solanaWeb3.LAMPORTS_PER_SOL} SOL, mevcut bakiye ${fromBalance / solanaWeb3.LAMPORTS_PER_SOL} SOL`);
         return; 
     }
 
-    // Transfer işlemi
+
     const transaction = new solanaWeb3.Transaction().add(
         solanaWeb3.SystemProgram.transfer({
             fromPubkey: fromKeypair.publicKey,
@@ -64,6 +64,7 @@ async function transferSol(fromSecretKey: number[], toPublicKey: string, amount:
             lamports: amount * solanaWeb3.LAMPORTS_PER_SOL 
         })
     );
+    
     const signature = await solanaWeb3.sendAndConfirmTransaction(connection, transaction, [fromKeypair]);
     console.log(`Transfer is successful: ${signature}`);
 }

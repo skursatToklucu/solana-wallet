@@ -45,7 +45,7 @@ npx ts-node wallet.ts balance <publicKey>
 ### SOL Transfer Etme
 
 ```bash
-npx ts-node wallet.ts transfer <toPublicKey> <Amount>
+npx ts-node wallet.ts transfer <walletIndex> <toPublicKey> <Amount>
 ```
 
 ### Solana Ağının Genel Istatistikleri
