@@ -4,7 +4,7 @@ HW0
 
 ## Özellikler
 
-- Yeni cüzdan oluşturma ve 1 SOL airdrop alma.
+- Yeni cüzdan oluşturma
 - Belirli bir cüzdana belirli miktar SOL airdrop yapma.
 - Belirli bir cüzdanın bakiyesini kontrol etme.
 - Bir cüzdandan diğerine SOL transferi yapma.
