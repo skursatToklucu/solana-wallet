@@ -2,16 +2,16 @@
 
 HW0
 
-## Özellikler
+## Features
 
-- Yeni cüzdan oluşturma
-- Belirli bir cüzdana belirli miktar SOL airdrop yapma.
-- Belirli bir cüzdanın bakiyesini kontrol etme.
-- Bir cüzdandan diğerine SOL transferi yapma.
+- Creating a new wallet
+- Airdropping a specific amount of SOL to a specific wallet.
+- Checking the balance of a specific wallet.
+- Transferring SOL from one wallet to another.
 
-## Kurulum
+## Installation
 
-Projeyi lokal bilgisayarınıza klonladıktan sonra, bağımlılıkları yüklemek için aşağıdaki komutu kullanın:
+After cloning the project to your local computer, use the following command to install dependencies:
 
 ```bash
 npm install
@@ -21,34 +21,34 @@ npm install
 npm install -g ts-node
 ```
 
-## Kullanım
+## Usage
 
-Bu araç, Solana cüzdanı işlevlerini gerçekleştirmek için komut satırı arayüzü sağlar. Aşağıdaki komutlarla çeşitli işlemleri yapabilirsiniz:
+This tool provides a command-line interface for performing Solana wallet functions. You can perform various operations with the following commands:
 
-### Yeni Cüzdan Oluşturma 
+### Creating a New Wallet
 
 ```bash
 npx ts-node wallet.ts new
 ```
-### SOL Airdrop Alma
+### Receiving SOL Airdrop
 
 ```bash
 npx ts-node wallet.ts airdrop <publicKey> [X]
 ```
 
-### Cüzdan Bakiyesini Kontrol Etme
+### Checking Wallet Balance
 
 ```bash
 npx ts-node wallet.ts balance <publicKey>
 ```
 
-### SOL Transfer Etme
+### Transferring SOL
 
 ```bash
 npx ts-node wallet.ts transfer <walletIndex> <toPublicKey> <Amount>
 ```
 
-### Solana Ağının Genel Istatistikleri
+### Solana Network General Statistics
 
 ```bash
 npx ts-node getNetworkStats.ts
